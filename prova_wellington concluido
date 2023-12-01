@@ -1,0 +1,53 @@
+use prova_wellington;
+
+select count(*) from pessoa;
+
+CREATE database prova_wellington;
+
+USE prova_wellington;
+
+SET SQL_MODE=""; 
+
+create TABLE pessoa(
+id int(11) primary KEY NOT NULL auto_increment,              
+    nome VARCHAR(4000) NOT NULL
+    );
+SELECT COUNT(*) FROM pessoa;
+
+SET SQL_MODE ='STRICT_ALL_TABLES';
+
+select count(*) from pessoa;
+   select count(*) from pessoa where nome like 'ISABEL MARIA FARIAS FERNANDES DE OLIVEIRA';
+   
+   update pessoa set nome = 'wellington miranda' where id = 18;
+   
+   update pessoa set nome = 'wellington miranda'where id = 180;
+   
+   update pessoa set nome = 'wellington miranda'where id = 1800;
+   
+   update pessoa set nome = 'wellington miranda' where id >= 2000 and id <= 2500;
+   
+   select * from pessoa where id  >= 2000 and id <= 2500;
+   
+   delete from pessoa where id > 4500;
+   
+   select count(*) from pessoa;
+
+CREATE TABLE unidade_requisitante (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  unidade VARCHAR(500) NOT NULL UNIQUE
+);
+alter table unidade_requisitante add column fk_pessoa int(11);
+
+alter table unidade_requisitante add constraint id_fk_pessoa
+foreign key(id) references pessoa (id);
+
+select p.id, p.nome, ur.fk_pessoa, ur.id, ur.unidade from pessoa p
+inner join unidade_requisitante ur
+on p.id = ur.fk_pessoa limit 100;
+
+select p.id, p.nome, ur.fk_pessoa, ur.id, ur.unidade from pessoa p
+inner join unidade_requisitante ur
+on p.id = ur.fk_pessoa WHERE p.id in (8, 80, 800);
+
+DROP TABLE unidade_requisitante;
